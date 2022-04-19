@@ -1,4 +1,5 @@
 using System;
+using PaymentContext.Domain.ValueObjects;
 
 namespace PaymentContext.Domain.Entities
 {
@@ -6,15 +7,15 @@ namespace PaymentContext.Domain.Entities
   {
     public BoletoPayment(
       string barCode,
-      string boletoNumber, 
+      string boletoNumber,
       DateTime paidDate,
       DateTime expireDate,
       decimal total,
       decimal totalPaid,
       string payer,
-      string document,
+      Document document,
       string address,
-      string email) : base(
+      Email email) : base(
         paidDate,
         expireDate,
         total,
