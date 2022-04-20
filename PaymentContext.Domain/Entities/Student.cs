@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using PaymentContext.Domain.ValueObjects;
@@ -25,10 +24,12 @@ namespace PaymentContext.Domain.Entities
 
     public void AddSubscription(Subscription subscription)
     {
-      foreach (var sub in Subscriptions)
-        sub.Inactivate();
-
-      _subscriptions.Add(subscription);
+      var hasSubscriptionsActive = false;
+      foreach (var sub in _subscriptions)
+      {
+        if (sub.Active)
+          hasSubscriptionsActive = true;
+      }
     }
   }
 }

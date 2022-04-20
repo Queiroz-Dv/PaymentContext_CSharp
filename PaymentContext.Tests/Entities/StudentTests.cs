@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PaymentContext.Domain.Entities;
 
 namespace PaymentContext.Tests.Entities
 {
@@ -9,7 +8,6 @@ namespace PaymentContext.Tests.Entities
     [TestMethod]
     public void AdicionarAssinatura()
     {
-      
     }
   }
 }
