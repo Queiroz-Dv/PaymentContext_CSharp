@@ -1,8 +1,6 @@
 using System;
-
 using Flunt.Notifications;
 using PaymentContext.Domain.Command;
-using PaymentContext.Domain.Commands;
 using PaymentContext.Domain.Entities;
 using PaymentContext.Domain.Enums;
 using PaymentContext.Domain.Repositories;
@@ -66,6 +64,11 @@ namespace PaymentContext.Domain.Handlers
       student.AddSubscription(subscription);
 
       AddNotifications(name, document, email, address, student, subscription, payment);
+
+      if (Invalid)
+      {
+        return new CommandResult(false, "Não foi possível realizar sua assinatura");
+      }
 
       _repository.CreateSub(student);
 
