@@ -4,12 +4,11 @@ using System.Linq;
 using Flunt.Validations;
 using PaymentContext.Domain.ValueObjects;
 using PaymentContext.Shared.Entities;
-
 namespace PaymentContext.Domain.Entities
 {
   public class Student : Entity
   {
-    private readonly IList<Subscription> _subscriptions;
+    private IList<Subscription> _subscriptions;
     public Student(Name name, Document document, Email email)
     {
       Name = name;
@@ -43,7 +42,9 @@ namespace PaymentContext.Domain.Entities
       }
       AddNotifications(new Contract()
       .Requires()
-      .IsFalse(hasSubscriptionsActive, "Student.Subscriptions", "Você já tem uma assinatura"));
+      .IsFalse(hasSubscriptionsActive, "Student.Subscriptions", "Você já tem uma assinatura")
+      .AreEquals(0, subscription.Payments.Count, "Student.Subscription.Payments", "Essa assinatura não possui pagamentos.")
+      );
     }
   }
 }
