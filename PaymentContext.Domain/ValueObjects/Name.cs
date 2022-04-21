@@ -1,3 +1,4 @@
+using Flunt.Validations;
 using PaymentContext.Shared.ValueObjects;
 
 namespace PaymentContext.Domain.ValueObjects
@@ -8,8 +9,11 @@ namespace PaymentContext.Domain.ValueObjects
     {
       FirstName = firstName;
       LastName = lastName;
-      if (string.IsNullOrEmpty(FirstName))
-        AddNotification("Name.Firstname", "Nome inválido");
+      AddNotifications(new Contract()
+      .Requires()
+      .HasMinLen(FirstName, 3, "Name.FirstName", "Nome deve conter pelo menos 3 caracteres")
+      .HasMaxLen(FirstName, 40, "Name.FirstName", "Nome deve conter pelo menos 40 caracteres")
+      );
 
     }
 

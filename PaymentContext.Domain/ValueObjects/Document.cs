@@ -1,4 +1,5 @@
 using System;
+using Flunt.Validations;
 using PaymentContext.Domain.Enums;
 using PaymentContext.Shared.ValueObjects;
 
@@ -12,7 +13,10 @@ namespace PaymentContext.Domain.ValueObjects
       Type = type;
       if (Validate())
       {
-        Console.WriteLine("Documento Inválido");
+        AddNotifications(new Contract()
+        .Requires()
+        .IsTrue(Validate(), "Document.Number", "Documento inválido")
+        );
       }
     }
 
@@ -27,7 +31,7 @@ namespace PaymentContext.Domain.ValueObjects
       if (Type == EDocumentType.CPF && Number.Length == 11)
         return true;
 
-      return false;  
+      return false;
     }
   }
 }
