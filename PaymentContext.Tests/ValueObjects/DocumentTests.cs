@@ -34,6 +34,5 @@ namespace PaymentContext.Tests.Entities
       var document = new Document("12345678912", EDocumentType.CPF);
       Assert.IsTrue(document.Valid);
     }
-
   }
 }
